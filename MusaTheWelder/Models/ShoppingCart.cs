@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MusaTheWelder.Models
 {
-    public partial class ShoppingCart
+   public partial class ShoppingCart
     {
         ApplicationDbContext dbContext = new ApplicationDbContext();
         string ShoppingCartId { get; set; }
@@ -80,7 +80,7 @@ namespace MusaTheWelder.Models
 
         //Remove From Cart
         public int RemoveFromCart(int id)
-        {
+        {      
             // Get the cart
             var cartItem = dbContext.Carts.Single(
                 cart => cart.CartId == ShoppingCartId
@@ -130,7 +130,7 @@ namespace MusaTheWelder.Models
             // Return 0 if all entries are null
             return count ?? 0;
         }
-
+        
         //Total Cost Of Cart
         public double GetTotal()
         {
@@ -138,10 +138,10 @@ namespace MusaTheWelder.Models
             // the current price for each of those items in the cart
             // sum all item price totals to get the cart total
             double? total = (from cartItems in dbContext.Carts
-                             where cartItems.CartId == ShoppingCartId
-                             select (int?)cartItems.Count *
-                             cartItems.Product.ProductPrice).Sum();
-
+                              where cartItems.CartId == ShoppingCartId
+                              select (int?)cartItems.Count *
+                              cartItems.Product.ProductPrice).Sum();
+            
             return total ?? double.NaN;
         }
 
