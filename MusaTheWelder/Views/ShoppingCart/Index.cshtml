@@ -1,7 +1,9 @@
 ﻿@model MusaTheWelder.ViewModels.ShoppingCartViewModel
 @{
     ViewBag.Title = "Shopping Cart";
+
 }
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -29,11 +31,13 @@
         });
     });
 </script>
+
 <h3 class="text-center text-success">
     <em>Review</em> your cart:
 </h3>
 
-@{
+@using (Html.BeginForm("Index", "ShoppingCart", FormMethod.Post))
+{
     if (Model.CartItems.Count > 0)
     {
         <div class="panel panel-info">
@@ -110,11 +114,31 @@
                             <strong>&#82;@ViewBag.TotalCost</strong>
                         </td>
                     </tr>
+                    <tr class="warning">
+                        <td>
+                            Add Installation
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td id="cart-install">
+                            <strong><input type="checkbox" id="installc" name="installc"></strong>
+                        </td>
+                    </tr>
                     <tfoot>Please ensure that all products in cart are correct before checking out.</tfoot>
                 </table>
-                <button type="button" class="btn btn-success btn-sm" onclick="location.href='@Url.Action("Payment", "Checkout")'">
+                <input type="text" id="Install" name="Install" rows="4" cols="50" hidden>
+                <br />
+                <br />
+                <button type="submit" value="Submit" class="btn btn-success btn-sm">
                     Confirm and Pay &#82;@ViewBag.TotalCost
                 </button>
+                <script type="text/javascript">
+                    checkbox = document.getElementById("installc");
+                    checkbox.onclick = function () {
+                        document.getElementById('Install').hidden = false;
+                        alert('Enter additional installation details below');
+                    }
+                </script>
             </div>
         </div>
 
@@ -128,3 +152,4 @@
         </div>
     }
 }
+

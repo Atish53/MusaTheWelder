@@ -19,6 +19,7 @@ namespace MusaTheWelder.Models
         public string PhoneNo { get; set; }
 
         public virtual List<SaleDetail> SaleDetails { get; set; }
+        public virtual List<SaleQuote> SaleQuotes { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -50,6 +51,7 @@ namespace MusaTheWelder.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
+        public DbSet<SaleQuote> SaleQuotes { get; set; }
 
         public static ApplicationDbContext Create()
         {

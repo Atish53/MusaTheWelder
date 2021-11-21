@@ -85,7 +85,23 @@
     }
 </style>
 
-<h2 class="text-center">Product Details</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var recordToAdd = $(this).attr("data-id");
+            if (recordToAdd != '') {
+                // Perform the ajax post
+                $.post("/ShoppingCart/AddToCart", { "id": recordToAdd },
+                    function (data) {
+                        $('#cart-status').text(data.CartCount);
+                    });
+            }
+        });
+    });
+</script>
 
 <!-- Button trigger modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -102,7 +118,7 @@
                 <h4 class="modal-title">Confirm check out.</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to checkout?</p>
+                <p class="text-warning">@Model.ProductName</p><p>has been added to your cart.</p>
 
             </div>
             <div class="modal-footer">
@@ -113,6 +129,8 @@
     </div>
 </div>
 
+<h2 class="text-center">Product Details</h2>
+
 <!-- The App Section -->
 <div class="container">
     <div class="row">
@@ -121,10 +139,10 @@
             <h1 class="large-font" style="color:MediumSeaGreen;"><b>Price: &#82;@Model.ProductPrice</b></h1>
             <p><span style="font-size:36px">Stock Remaining: @Model.ProductStock.</span></p>
 
-
             <br />
             <a href="#" class="AddLink" data-id="@Model.ProductId" data-toggle="modal" data-target="#myModal">Add to cart</a>
-            <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })">-->
+            <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
+
         </div>
         <div class="column-33">
             <img src="data:image;base64,@System.Convert.ToBase64String(@Model.ProductImage)" width="435" height="471">

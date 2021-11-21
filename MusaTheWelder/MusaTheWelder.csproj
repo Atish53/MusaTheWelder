@@ -183,7 +183,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
@@ -204,6 +203,10 @@
     <Compile Include="Migrations\202111201246306_no.cs" />
     <Compile Include="Migrations\202111201246306_no.Designer.cs">
       <DependentUpon>202111201246306_no.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111211620128_Musas.cs" />
+    <Compile Include="Migrations\202111211620128_Musas.Designer.cs">
+      <DependentUpon>202111211620128_Musas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -233,6 +236,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\EmailLogo.png" />
     <Content Include="Images\W1.jpeg" />
     <Content Include="Images\W2.jpeg" />
     <Content Include="Images\W3.jpeg" />
@@ -327,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111201246306_no.resx">
       <DependentUpon>202111201246306_no.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111211620128_Musas.resx">
+      <DependentUpon>202111211620128_Musas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
