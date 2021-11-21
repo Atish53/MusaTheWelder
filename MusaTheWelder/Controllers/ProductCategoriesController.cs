@@ -11,6 +11,7 @@ using MusaTheWelder.Models;
 
 namespace MusaTheWelder.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductCategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -126,3 +127,4 @@ namespace MusaTheWelder.Controllers
         }
     }
 }
+

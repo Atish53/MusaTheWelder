@@ -22,7 +22,7 @@ namespace MusaTheWelder.Models
 
         public byte[] ProductImage { get; set; }
 
-        public bool isActive { get; set; }
+        public bool isActive { get; set; }        
 
         //Virtual Classes
 

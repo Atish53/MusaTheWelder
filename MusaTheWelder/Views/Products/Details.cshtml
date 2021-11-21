@@ -4,63 +4,141 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductCategoryId)
-        </dt>
+    body {
+        margin: 0;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductCategoryId)
-        </dd>
+    .row:after {
+        content: "";
+        display: table;
+        clear: both
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
+    .column-66 {
+        float: left;
+        width: 66.66666%;
+        padding: 20px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
+    .column-33 {
+        float: left;
+        width: 33.33333%;
+        padding: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductStock)
-        </dt>
+    .large-font {
+        font-size: 48px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductStock)
-        </dd>
+    .button {
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #04AA6D;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </dt>
+    .xlarge-font {
+        font-size: 64px
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductPrice)
-        </dd>
+    .commentBox {
+        background-color: #efefef;
+        padding: 10px;
+        border-radius: 10px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImage)
-        </dt>
+    .starFade {
+        background-image: url('/Images/StarFade.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductImage)
-        </dd>
+    .starFadeN {
+        background-image: url('/Images/StarFade.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isActive)
-        </dt>
+    .starGlow {
+        background-image: url('/Images/starglow.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.isActive)
-        </dd>
+    .starGlowN {
+        background-image: url('/Images/starglow.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
+</style>
 
-    </dl>
+<h2 class="text-center">Product Details</h2>
+
+<!-- Button trigger modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div aria-hidden="true" class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
+    </div>
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Confirm check out.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to checkout?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Keep Shopping</button>
+                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">Check Out</button>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<!-- The App Section -->
+<div class="container">
+    <div class="row">
+        <div class="column-66">
+            <h1 class="xlarge-font"><b>@Model.ProductName</b></h1>
+            <h1 class="large-font" style="color:MediumSeaGreen;"><b>Price: &#82;@Model.ProductPrice</b></h1>
+            <p><span style="font-size:36px">Stock Remaining: @Model.ProductStock.</span></p>
+
+
+            <br />
+            <a href="#" class="AddLink" data-id="@Model.ProductId" data-toggle="modal" data-target="#myModal">Add to cart</a>
+            <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })">-->
+        </div>
+        <div class="column-33">
+            <img src="data:image;base64,@System.Convert.ToBase64String(@Model.ProductImage)" width="435" height="471">
+        </div>
+    </div>
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+
+

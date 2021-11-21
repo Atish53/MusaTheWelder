@@ -5,12 +5,36 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+<ul class="nav navbar-nav navbar-right">
+    <li class="active">@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+    <li>
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administative Functions<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Manage Products", "Index", "Products")</li>
+                <li>@Html.ActionLink("Manage Product Categories", "Index", "ProductCategories")</li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Manage Installation Quotes</li>
+                <li>@Html.ActionLink("Manage Quotes", "Index", "SaleQuotes")</li>
+            </ul>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+    }
+    else if (Request.IsAuthenticated)
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Functions<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header">Your Purchases</li>
+                <li>@Html.ActionLink("Purchase History", "PurchaseHistory", "Manage")</li>
+            </ul>
+        </li>
+    }
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
     }
 }
 else
