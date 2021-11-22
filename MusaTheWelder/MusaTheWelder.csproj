@@ -197,11 +197,16 @@
     <Compile Include="Migrations\202111220951154_First.Designer.cs">
       <DependentUpon>202111220951154_First.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111222221123_Installer.cs" />
+    <Compile Include="Migrations\202111222221123_Installer.Designer.cs">
+      <DependentUpon>202111222221123_Installer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\IdentityExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Installation.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
@@ -298,7 +303,10 @@
     <Content Include="Views\SaleQuotes\Details.cshtml" />
     <Content Include="Views\SaleQuotes\Edit.cshtml" />
     <Content Include="Views\SaleQuotes\Index.cshtml" />
-    <Content Include="Views\SaleQuotes\YourQuotes.cshtml" />
+    <Content Include="Views\SaleQuotes\QuoteDetails.cshtml" />
+    <Content Include="Views\SaleQuotes\RejectedQuote.cshtml" />
+    <Content Include="Views\Manage\YourPurchases.cshtml" />
+    <Content Include="Views\Manage\YourQuotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +328,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111220951154_First.resx">
       <DependentUpon>202111220951154_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111222221123_Installer.resx">
+      <DependentUpon>202111222221123_Installer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

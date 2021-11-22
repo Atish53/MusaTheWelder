@@ -59,7 +59,23 @@
     <div class="container">
         <div class="row">
             <div class="column-66">
-                <h1 class="xlarge-font"><b>@Model.Status</b></h1>
+                <h1 class="xlarge-font">
+                    <b>
+                        @if (Model.Status == "Responded")
+                        {
+                            <b>Responded - </b><b class="text-warning">Waiting For Your Response</b>
+                        }
+                        else if (Model.Status == "Accepted")
+                        {
+                            <b class="text-success">Accepted</b>
+                            <b class="text-success"> - Installation Pending</b>
+                        }
+                        else if (Model.Status == "Rejected")
+                        {
+                            <b class="text-danger">Rejected</b>
+                        }
+                    </b>
+                </h1>
                 <h1 class="large-font" style="color:MediumSeaGreen;"><b>Current Quote Price: &#82;@Model.QuotePrice</b></h1>
                 <p><span style="font-size:36px">Instructions: @Model.QuoteInstructions</span></p>
                 <h2>Items: </h2>
@@ -77,11 +93,16 @@
             </div>
         </div>
     </div>
-
+}
+@if (User.IsInRole("Admin"))
+{
     <input type="text" id="Install" name="Install" rows="4" cols="50">
     <button type="submit" value="Submit" class="btn btn-success btn-sm">Update Quote</button>
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 }
+<a href="@Url.Action("YourQuotes","Manage")" class="btn btn-info"><i class="fa fa-shopping-cart"></i>Back To Quotes</a>
+@if ((Model.isAccepted == false) && (Model.isPaid == false) && (Model.isDeclined == false))
+{
+    <a href="@Url.Action(actionName: "AcceptQuote", controllerName: "SaleQuotes", routeValues: new { id = Model.SaleQuoteId })" class="btn btn-success"><i class="fa fa-shopping-cart"></i>Accept Quote And Pay &#82;@Model.QuotePrice</a>
+    <a href="@Url.Action(actionName: "RejectQuote", controllerName: "SaleQuotes", routeValues: new { id = Model.SaleQuoteId })" class="btn btn-danger"><i class="fa fa-shopping-cart"></i>Decline</a>
+    }
 

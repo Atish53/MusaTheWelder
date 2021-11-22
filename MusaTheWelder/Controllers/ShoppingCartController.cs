@@ -332,7 +332,7 @@ namespace MusaTheWelder.Controllers
             try
             {
                 // Retrieve required values for the PayFast Merchant
-                string name = "Musa's Welding Sale Number: #" + sale.SaleTotal;
+                string name = "Musa's Welding Sale Number: #" + sale.SaleId;
                 string description = "This is a once-off and non-refundable payment. ";
 
                 string site = "https://sandbox.payfast.co.za/eng/process";

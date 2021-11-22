@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -358,7 +359,20 @@ namespace MusaTheWelder.Controllers
         return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
     }
 
-    protected override void Dispose(bool disposing)
+        // GET: 
+        public async Task<ActionResult> YourPurchases()
+        {
+            return View(await db.Sales.ToListAsync());
+        }
+
+        // GET: 
+        public async Task<ActionResult> YourQuotes()
+        {
+            return View(await db.SaleQuotes.ToListAsync());
+        }
+
+
+        protected override void Dispose(bool disposing)
     {
         if (disposing && _userManager != null)
         {

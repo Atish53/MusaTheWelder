@@ -29,7 +29,9 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer Functions<b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li class="dropdown-header">Your Purchases</li>
-                <li>@Html.ActionLink("Purchase History", "PurchaseHistory", "Manage")</li>
+                <li>@Html.ActionLink("Purchase History", "YourPurchases", "Manage")</li>
+                <li class="dropdown-header">Your Quotes</li>
+                <li>@Html.ActionLink("Quotes History", "YourQuotes", "Manage")</li>
             </ul>
         </li>
     }

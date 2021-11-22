@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using MusaTheWelder.Models;
 using System.Net.Mail;
+using System.Text;
 
 namespace MusaTheWelder.Controllers
 {
@@ -21,6 +22,107 @@ namespace MusaTheWelder.Controllers
         {
             var saleQuotes = db.SaleQuotes.Include(s => s.Sale);
             return View(await saleQuotes.ToListAsync());
+        }
+
+        // GET: SaleQuotes/Details/5
+        public async Task<ActionResult> QuoteDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            SaleQuote saleQuote = await db.SaleQuotes.FindAsync(id);
+            if (saleQuote == null)
+            {
+                return HttpNotFound();
+            }
+
+            int ids = saleQuote.SaleId;
+
+            var productList = from db in db.SaleDetails
+                              where db.SaleId == ids
+                              select db.Product;
+
+            ViewBag.SaleDetails = productList;
+
+            return View(saleQuote);
+        }
+
+        
+        public async Task<ActionResult> AcceptQuote(int? id)
+        {
+            SaleQuote saleQuote = await db.SaleQuotes.FindAsync(id);
+            saleQuote.Status = "Accepted";
+            saleQuote.isAccepted = true;
+            saleQuote.isPaid = true;
+            saleQuote.isDeclined = false;
+
+            Installation installation = new Installation();
+            installation.SaleQuoteId = saleQuote.SaleQuoteId;
+            installation.isInstalled = false;            
+
+            int saleids = saleQuote.SaleId;
+
+            Sale sale = await db.Sales.FindAsync(saleids);
+
+            db.SaveChanges();
+
+            //Payment...
+            try
+            {
+                // Retrieve required values for the PayFast Merchant
+                string name = "Musa's Welding Quote/Installation Number: #" + saleQuote.SaleQuoteId;
+                string description = "This is a once-off and non-refundable payment. ";
+
+                string site = "https://sandbox.payfast.co.za/eng/process";
+                string merchant_id = "";
+                string merchant_key = "";
+
+                string paymentMode = System.Configuration.ConfigurationManager.AppSettings["PaymentMode"];
+
+                if (paymentMode == "test")
+                {
+                    site = "https://sandbox.payfast.co.za/eng/process?";
+                    merchant_id = "10000100";
+                    merchant_key = "46f0cd694581a";
+                }
+
+                // Build the query string for payment site
+
+                StringBuilder str = new StringBuilder();
+                str.Append("merchant_id=" + HttpUtility.UrlEncode(merchant_id));
+                str.Append("&merchant_key=" + HttpUtility.UrlEncode(merchant_key));
+                str.Append("&return_url=" + HttpUtility.UrlEncode(System.Configuration.ConfigurationManager.AppSettings["PF_ReturnURL"]));
+                str.Append("&cancel_url=" + HttpUtility.UrlEncode(System.Configuration.ConfigurationManager.AppSettings["PF_CancelURL"]));
+                str.Append("&notify_url=" + HttpUtility.UrlEncode(System.Configuration.ConfigurationManager.AppSettings["PF_NotifyURL"]));
+
+                str.Append("&m_payment_id=" + HttpUtility.UrlEncode(sale.SaleId.ToString()));
+                str.Append("&amount=" + HttpUtility.UrlEncode(saleQuote.QuotePrice.ToString()));
+                str.Append("&item_name=" + HttpUtility.UrlEncode(name));
+                str.Append("&item_description=" + HttpUtility.UrlEncode(description));
+
+                // Redirect to PayFast
+                return Redirect(site + str.ToString());
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
+        }
+
+        
+        public async Task<ActionResult> RejectQuote(int? id)
+        {
+
+            SaleQuote saleQuote = await db.SaleQuotes.FindAsync(id);                       
+            saleQuote.Status = "Rejected";
+            saleQuote.isAccepted = false;
+            saleQuote.isPaid = false;
+            saleQuote.isDeclined = true;
+
+            db.SaveChanges();
+            
+            return RedirectToAction("RejectedQuote");
         }
 
 

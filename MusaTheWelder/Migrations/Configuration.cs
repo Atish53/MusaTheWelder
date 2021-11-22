@@ -23,11 +23,9 @@ namespace MusaTheWelder.Migrations
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
             var user = new ApplicationUser { UserName = "admin@musa.com" };
-
             userManager.Create(user, "Admin123@");
-
             roleManager.Create(new IdentityRole { Name = "Admin" });
-            userManager.AddToRole(user.Id, "Admin");*/
+            //userManager.AddToRole(user.Id, "Admin");*/
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
         }
