@@ -4,95 +4,84 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="text-center">Details</h2>
 
-<div>
-    <h4>SaleQuote</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </dt>
+<h2 class="text-center">Quote Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product.ProductName)
-        </dd>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Sale.SaleDate)
-        </dt>
+    body {
+        margin: 0;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Sale.SaleDate)
-        </dd>
+    .row:after {
+        content: "";
+        display: table;
+        clear: both
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
+    .column-66 {
+        float: left;
+        width: 66.66666%;
+        padding: 20px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
+    .column-33 {
+        float: left;
+        width: 33.33333%;
+        padding: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </dt>
+    .large-font {
+        font-size: 48px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductPrice)
-        </dd>
+    .button {
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #04AA6D;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.QuoteInstructions)
-        </dt>
+    .xlarge-font {
+        font-size: 64px
+    }
+</style>
 
-        <dd>
-            @Html.DisplayFor(model => model.QuoteInstructions)
-        </dd>
+@using (Html.BeginForm("Details", "SaleQuotes", FormMethod.Post))
+{
+    <!-- The App Section -->
+    <div class="container">
+        <div class="row">
+            <div class="column-66">
+                <h1 class="xlarge-font"><b>@Model.Status</b></h1>
+                <h1 class="large-font" style="color:MediumSeaGreen;"><b>Current Quote Price: &#82;@Model.QuotePrice</b></h1>
+                <p><span style="font-size:36px">Instructions: @Model.QuoteInstructions</span></p>
+                <h2>Items: </h2>
+                @foreach (var item in ViewBag.SaleDetails)
+                {
+                    <ul>
+                        <li>
+                            @item.ProductName - <strong>&#82;            @item.ProductPrice <img src="data:image;base64,@System.Convert.ToBase64String(item.ProductImage)" width="100px" height="100px" /></strong>
+                        </li>
+                    </ul>
+                }
+                <br />
+            </div>
+            <div class="column-33">
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+    <input type="text" id="Install" name="Install" rows="4" cols="50">
+    <button type="submit" value="Submit" class="btn btn-success btn-sm">Update Quote</button>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.QuotePrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuotePrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isAccepted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isAccepted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isDeclined)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isDeclined)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isPaid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isPaid)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SaleQuoteId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -4,15 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2 class="text-center text-info">Custom Quotes</h2>
+<h2 class="text-center text-warning">Administrator Quotes Menu</h2>
 
+
+<h3 class="text-center text-danger">Pending Quotes</h3>
 <table class="table">
     <tr>
-        
         <th>
             @Html.DisplayNameFor(model => model.Sale.SaleDate)
         </th>
-        
         <th>
             @Html.DisplayNameFor(model => model.QuoteInstructions)
         </th>
@@ -34,79 +34,12 @@
         <th></th>
     </tr>
 
-
-<h3 class="text-center text-info">Pending Quotes</h3>
-@foreach (var item in Model.Where(x => x.Status == "Pending")) {
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Sale.SaleDate)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.QuoteInstructions)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuotePrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isAccepted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isDeclined)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isPaid)
-        </td>
-        <td>           
-            @Html.ActionLink("Give Quote", "Details", new { id=item.SaleQuoteId })
-        </td>
-    </tr>
-}
-
-</table>
-
-<table class="table">
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Sale.SaleDate)
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.QuoteInstructions)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuotePrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isAccepted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isDeclined)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isPaid)
-        </th>
-        <th></th>
-    </tr>
-
-
-    <h3 class="text-center text-info">Accepted Quotes</h3>
-    @foreach (var item in Model.Where(x => x.Status == "Accepted"))
+    @foreach (var item in Model.Where(x => x.Status == "Pending"))
     {
         <tr>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.Sale.SaleDate)
             </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.QuoteInstructions)
             </td>
@@ -126,20 +59,25 @@
                 @Html.DisplayFor(modelItem => item.isPaid)
             </td>
             <td>
+
                 @Html.ActionLink("Give Quote", "Details", new { id = item.SaleQuoteId })
             </td>
         </tr>
     }
 
+
+
 </table>
 
+<hr />
+<br />
+
+<h3 class="text-center text-danger">Responded Quotes</h3>
 <table class="table">
     <tr>
-        
         <th>
             @Html.DisplayNameFor(model => model.Sale.SaleDate)
         </th>
-        
         <th>
             @Html.DisplayNameFor(model => model.QuoteInstructions)
         </th>
@@ -161,16 +99,12 @@
         <th></th>
     </tr>
 
-
-    <h3 class="text-center text-info">Pending Quotes</h3>
-    @foreach (var item in Model.Where(x => x.Status == "Declined"))
+    @foreach (var item in Model.Where(x => x.Status == "Responded"))
     {
         <tr>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.Sale.SaleDate)
             </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.QuoteInstructions)
             </td>
@@ -190,20 +124,23 @@
                 @Html.DisplayFor(modelItem => item.isPaid)
             </td>
             <td>
-                @Html.ActionLink("Give Quote", "Details", new { id = item.SaleQuoteId })
             </td>
         </tr>
     }
 
+
+
 </table>
 
+<hr />
+<br />
+
+<h3 class="text-center text-info">Accepted Quotes</h3>
 <table class="table">
     <tr>
-        
         <th>
             @Html.DisplayNameFor(model => model.Sale.SaleDate)
         </th>
-        
         <th>
             @Html.DisplayNameFor(model => model.QuoteInstructions)
         </th>
@@ -225,15 +162,12 @@
         <th></th>
     </tr>
 
-
-    <h3 class="text-center text-info">Finalized Quotes</h3>
-    @foreach (var item in Model.Where(x => x.Status == "Finalized"))
+    @foreach (var item in Model.Where(x => x.isAccepted == true))
     {
         <tr>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.Sale.SaleDate)
-            </td>           
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QuoteInstructions)
             </td>
@@ -253,9 +187,72 @@
                 @Html.DisplayFor(modelItem => item.isPaid)
             </td>
             <td>
+
                 @Html.ActionLink("Give Quote", "Details", new { id = item.SaleQuoteId })
             </td>
         </tr>
     }
+</table>
 
+<hr />
+<br />
+
+
+<h3 class="text-center text-success">Finalized Quotes</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sale.SaleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteInstructions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuotePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isAccepted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isDeclined)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPaid)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Where(x => x.isPaid == true))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sale.SaleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteInstructions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuotePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isAccepted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isDeclined)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isPaid)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.SaleQuoteId })
+            </td>
+        </tr>
+    }
 </table>

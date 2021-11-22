@@ -180,8 +180,10 @@ namespace MusaTheWelder.Controllers
                     }
                 }
             }
-
-            dB.SaleQuotes.Add(saleQuote);
+            if (InstallData != "")
+            {
+                dB.SaleQuotes.Add(saleQuote);
+            }
             dB.Sales.Add(sale);
             dB.SaveChangesAsync();
 
@@ -302,7 +304,7 @@ namespace MusaTheWelder.Controllers
 
             MailMessage mail = new MailMessage();
             string emailTo = sale.Email;
-            MailAddress from = new MailAddress("africanmagicsystem@gmail.com");
+            MailAddress from = new MailAddress("21827882@dut4life.ac.za");
             mail.From = from;
             mail.Subject = "Your invoice for order number #" + sale.SaleId;
             mail.Body = "Dear " + sale.CustomerName + ", find your invoice in the attached PDF document.";
@@ -312,10 +314,10 @@ namespace MusaTheWelder.Controllers
 
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
+            smtp.Host = "smtp-mail.outlook.com";
             smtp.EnableSsl = true;
-            NetworkCredential networkCredential = new NetworkCredential("africanmagicsystem@gmail.com", "zbpabilmryequenp");
-            smtp.UseDefaultCredentials = true;
+            NetworkCredential networkCredential = new NetworkCredential("21827882@dut4life.ac.za", "Dut991110");
+            smtp.UseDefaultCredentials = false;
             smtp.Credentials = networkCredential;
             smtp.Port = 587;
             smtp.Send(mail);
@@ -330,7 +332,7 @@ namespace MusaTheWelder.Controllers
             try
             {
                 // Retrieve required values for the PayFast Merchant
-                string name = "AppDev2 Store Sale Number: #" + sale.SaleTotal;
+                string name = "Musa's Welding Sale Number: #" + sale.SaleTotal;
                 string description = "This is a once-off and non-refundable payment. ";
 
                 string site = "https://sandbox.payfast.co.za/eng/process";
