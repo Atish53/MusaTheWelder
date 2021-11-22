@@ -85,6 +85,26 @@ namespace MusaTheWelder.Migrations
                 .PrimaryKey(t => t.SaleId);
             
             CreateTable(
+                "dbo.SaleQuotes",
+                c => new
+                    {
+                        SaleQuoteId = c.Int(nullable: false, identity: true),
+                        SaleId = c.Int(nullable: false),
+                        QuoteInstructions = c.String(),
+                        Status = c.String(),
+                        QuotePrice = c.Double(nullable: false),
+                        isAccepted = c.Boolean(nullable: false),
+                        isDeclined = c.Boolean(nullable: false),
+                        isPaid = c.Boolean(nullable: false),
+                        ApplicationUser_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.SaleQuoteId)
+                .ForeignKey("dbo.Sales", t => t.SaleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
+                .Index(t => t.SaleId)
+                .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -163,12 +183,14 @@ namespace MusaTheWelder.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.SaleQuotes", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.SaleDetails", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Carts", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.SaleQuotes", "SaleId", "dbo.Sales");
             DropForeignKey("dbo.SaleDetails", "SaleId", "dbo.Sales");
             DropForeignKey("dbo.SaleDetails", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Products", "ProductCategory_ProductCatergoryId", "dbo.ProductCategories");
@@ -178,6 +200,8 @@ namespace MusaTheWelder.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.SaleQuotes", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.SaleQuotes", new[] { "SaleId" });
             DropIndex("dbo.SaleDetails", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.SaleDetails", new[] { "ProductId" });
             DropIndex("dbo.SaleDetails", new[] { "SaleId" });
@@ -188,6 +212,7 @@ namespace MusaTheWelder.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.SaleQuotes");
             DropTable("dbo.Sales");
             DropTable("dbo.SaleDetails");
             DropTable("dbo.ProductCategories");

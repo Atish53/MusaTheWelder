@@ -10,7 +10,7 @@ namespace MusaTheWelder.Models
     {
         [Key]
         public int SaleDetailId { get; set; }
-        public int SaleId { get; set; }
+        public int SaleId { get; set; }        
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public double ProductPrice { get; set; }

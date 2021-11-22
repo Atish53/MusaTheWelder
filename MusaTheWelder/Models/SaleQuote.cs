@@ -10,11 +10,7 @@ namespace MusaTheWelder.Models
     {
         //
         public int SaleQuoteId { get; set; }
-        public int SaleId { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
-        public double ProductPrice { get; set; }
-        public virtual Product Product { get; set; }
+        public int SaleId { get; set; }       
         public virtual Sale Sale { get; set; }
 
         //
@@ -26,6 +22,6 @@ namespace MusaTheWelder.Models
         //Quote Status
         public bool isAccepted { get; set; }
         public bool isDeclined { get; set; }
-        public bool isPaid { get; set; }
+        public bool isPaid { get; set; }        
     }
 }

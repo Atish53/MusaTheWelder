@@ -7,13 +7,13 @@ namespace MusaTheWelder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class specials : IMigrationMetadata
+    public sealed partial class First : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(specials));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(First));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111201244410_specials"; }
+            get { return "202111220951154_First"; }
         }
         
         string IMigrationMetadata.Source

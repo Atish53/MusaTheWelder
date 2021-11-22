@@ -192,21 +192,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111192126162_First.cs" />
-    <Compile Include="Migrations\202111192126162_First.Designer.cs">
-      <DependentUpon>202111192126162_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111201244410_specials.cs" />
-    <Compile Include="Migrations\202111201244410_specials.Designer.cs">
-      <DependentUpon>202111201244410_specials.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111201246306_no.cs" />
-    <Compile Include="Migrations\202111201246306_no.Designer.cs">
-      <DependentUpon>202111201246306_no.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111211620128_Musas.cs" />
-    <Compile Include="Migrations\202111211620128_Musas.Designer.cs">
-      <DependentUpon>202111211620128_Musas.cs</DependentUpon>
+    <Compile Include="Migrations\202111220951154_First.cs" />
+    <Compile Include="Migrations\202111220951154_First.Designer.cs">
+      <DependentUpon>202111220951154_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,6 +292,12 @@
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\SaleQuotes\Create.cshtml" />
+    <Content Include="Views\SaleQuotes\Delete.cshtml" />
+    <Content Include="Views\SaleQuotes\Details.cshtml" />
+    <Content Include="Views\SaleQuotes\Edit.cshtml" />
+    <Content Include="Views\SaleQuotes\Index.cshtml" />
+    <Content Include="Views\SaleQuotes\YourQuotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,17 +317,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111192126162_First.resx">
-      <DependentUpon>202111192126162_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111201244410_specials.resx">
-      <DependentUpon>202111201244410_specials.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111201246306_no.resx">
-      <DependentUpon>202111201246306_no.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111211620128_Musas.resx">
-      <DependentUpon>202111211620128_Musas.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111220951154_First.resx">
+      <DependentUpon>202111220951154_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

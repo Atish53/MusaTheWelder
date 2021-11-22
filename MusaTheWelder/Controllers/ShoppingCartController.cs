@@ -136,7 +136,7 @@ namespace MusaTheWelder.Controllers
 
             SaleQuote saleQuote = new SaleQuote();
 
-            if (InstallData == "")
+            if (InstallData != "")
             {               
                 saleQuote.Status = "Pending";
                 saleQuote.QuoteInstructions = InstallData;
@@ -145,17 +145,7 @@ namespace MusaTheWelder.Controllers
                 saleQuote.isPaid = false;
                 saleQuote.SaleId = sale.SaleId;
 
-            }
-
-            var cartItems = cart.GetCartItems();
-            // Iterate over the items in the cart, 
-            // adding the order details for each
-            foreach (var item in cartItems)
-            {
-                saleQuote.ProductId = item.ProductId;                
-                saleQuote.ProductPrice = item.Product.ProductPrice;
-                saleQuote.Quantity = item.Count;               
-            }
+            }            
 
             //Customer Details
             sale.Email = User.Identity.Name;

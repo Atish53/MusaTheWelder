@@ -30,5 +30,6 @@ namespace MusaTheWelder.Models
         public double SaleTotal { get; set; }
 
         public List<SaleDetail> SaleDetails { get; set; }
+        public List<SaleQuote> SaleQuotes { get; set; }
     }
 }
