@@ -48,6 +48,8 @@ namespace MusaTheWelder.Controllers
             return View(saleQuote);
         }
 
+
+
         
         public async Task<ActionResult> AcceptQuote(int? id)
         {
@@ -60,11 +62,13 @@ namespace MusaTheWelder.Controllers
             Installation installation = new Installation();
             installation.SaleQuoteId = saleQuote.SaleQuoteId;
             installation.isInstalled = false;            
+            installation.DateInstalled = "";            
 
             int saleids = saleQuote.SaleId;
 
             Sale sale = await db.Sales.FindAsync(saleids);
 
+            db.Installations.Add(installation);
             db.SaveChanges();
 
             //Payment...
@@ -125,6 +129,31 @@ namespace MusaTheWelder.Controllers
             return RedirectToAction("RejectedQuote");
         }
 
+        public async Task<ActionResult> Install(int? id)
+        {
+            int ids = 0;
+            SaleQuote saleQuote = await db.SaleQuotes.FindAsync(id);
+
+            int saleQuoteId = saleQuote.SaleQuoteId;
+
+            var installId = from db in db.Installations
+                            where db.SaleQuoteId == id
+                            select db;
+
+            foreach (var item in installId)
+            {
+                ids = item.InstallationId;
+            }           
+
+            Installation installation = await db.Installations.FindAsync(ids);
+
+            installation.isInstalled = true;
+            installation.DateInstalled = DateTime.Now.ToString();
+
+            db.SaveChanges();
+
+            return RedirectToAction("Details" + "/" + id); ;
+        }
 
         // GET: SaleQuotes/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -147,14 +176,31 @@ namespace MusaTheWelder.Controllers
 
             ViewBag.SaleDetails = productList;
 
+            int saleQuoteId = saleQuote.SaleQuoteId;
+
+            var installId = from db in db.Installations
+                            where db.SaleQuoteId == saleQuoteId
+                            select db;
+
+            int idss = 0;
+
+            foreach (var item in installId)
+            {
+                idss = item.InstallationId;
+            }
+
+            Installation installation = await db.Installations.FindAsync(idss);
+
+            ViewBag.DateInstalled = installation.DateInstalled;           
+
             return View(saleQuote);
         }
 
         [HttpPost]
         public async Task<ActionResult> Details(string Install, int id)
-        {
+        {           
             SaleQuote saleQuote = await db.SaleQuotes.FindAsync(id);
-            ViewData["Install"] = Install;
+            ViewData["Install"] = Install;            
 
             string InstallData = Install;
 

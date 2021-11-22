@@ -39,6 +39,10 @@
         font-size: 48px;
     }
 
+    .small-font {
+        font-size: 20px;
+    }
+
     .button {
         border: none;
         color: white;
@@ -68,7 +72,11 @@
                         else if (Model.Status == "Accepted")
                         {
                             <b class="text-success">Accepted</b>
-                            <b class="text-success"> - Installation Pending</b>
+                            if (ViewBag.DateInstalled != "")
+                            {                                                           
+                                <b class="text-success"> - Installation Successful</b>   
+                                <h3 class="text-info">Installed On @ViewBag.DateInstalled</h3>
+                            }
                         }
                         else if (Model.Status == "Rejected")
                         {
@@ -77,6 +85,8 @@
                     </b>
                 </h1>
                 <h1 class="large-font" style="color:MediumSeaGreen;"><b>Current Quote Price: &#82;@Model.QuotePrice</b></h1>
+                <h2 class="large-font" style="color:cadetblue;"><b>Customer: @Model.Sale.CustomerName </b></h2>
+                <h4 class="small-font" style="color:cadetblue;"><b>Customer Email: @Model.Sale.Email </b></h4>
                 <p><span style="font-size:36px">Instructions: @Model.QuoteInstructions</span></p>
                 <h2>Items: </h2>
                 @foreach (var item in ViewBag.SaleDetails)
@@ -104,5 +114,10 @@
 {
     <a href="@Url.Action(actionName: "AcceptQuote", controllerName: "SaleQuotes", routeValues: new { id = Model.SaleQuoteId })" class="btn btn-success"><i class="fa fa-shopping-cart"></i>Accept Quote And Pay &#82;@Model.QuotePrice</a>
     <a href="@Url.Action(actionName: "RejectQuote", controllerName: "SaleQuotes", routeValues: new { id = Model.SaleQuoteId })" class="btn btn-danger"><i class="fa fa-shopping-cart"></i>Decline</a>
-    }
+}
+
+@if (User.IsInRole("Install") && ViewBag.DateInstalled == "")
+{    
+<a href="@Url.Action(actionName: "Install", controllerName: "SaleQuotes", routeValues: new { id = Model.SaleQuoteId })" class="btn btn-success"><i class="fa fa-shopping-cart"></i>Confirm Installation</a>
+}
 

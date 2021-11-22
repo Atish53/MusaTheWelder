@@ -371,6 +371,14 @@ namespace MusaTheWelder.Controllers
             return View(await db.SaleQuotes.ToListAsync());
         }
 
+        // GET: 
+        [Authorize(Roles = "Install")]
+        public async Task<ActionResult> InstallQuotes()
+        {
+            return View(await db.SaleQuotes.ToListAsync());
+        }
+
+
 
         protected override void Dispose(bool disposing)
     {
