@@ -47,236 +47,6 @@ namespace MusaTheWelder.Controllers
             return View(students.ToList());
         }
 
-        // GET: Products 
-        public ActionResult OurProducts(string sortOrder, string currentFilter, string searchString, int? page)
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var items = from i in db.Products
-                        select i;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                items = items.Where(s => s.ProductName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.ProductCategory.CategoryName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    items = items.OrderByDescending(s => s.ProductName);
-                    break;
-                case "Price":
-                    items = items.OrderBy(s => s.ProductPrice);
-                    break;
-                case "price_desc":
-                    items = items.OrderByDescending(s => s.ProductPrice);
-                    break;
-                default:  // Sort By Name ASC
-                    items = items.OrderBy(s => s.ProductName);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(items.ToPagedList(pageNumber, pageSize));
-        }
-
-        // GET: Products 
-        public ActionResult Food(string sortOrder, string currentFilter, string searchString, int? page)
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var items = from i in db.Products
-                        select i;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                items = items.Where(s => s.ProductName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.ProductCategory.CategoryName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    items = items.OrderByDescending(s => s.ProductName);
-                    break;
-                case "Price":
-                    items = items.OrderBy(s => s.ProductPrice);
-                    break;
-                case "price_desc":
-                    items = items.OrderByDescending(s => s.ProductPrice);
-                    break;
-                default:  // Sort By Name ASC
-                    items = items.OrderBy(s => s.ProductName);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(items.ToPagedList(pageNumber, pageSize));
-        }
-
-        // GET: Products 
-        public ActionResult Drinks(string sortOrder, string currentFilter, string searchString, int? page)
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var items = from i in db.Products
-                        select i;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                items = items.Where(s => s.ProductName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.ProductCategory.CategoryName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    items = items.OrderByDescending(s => s.ProductName);
-                    break;
-                case "Price":
-                    items = items.OrderBy(s => s.ProductPrice);
-                    break;
-                case "price_desc":
-                    items = items.OrderByDescending(s => s.ProductPrice);
-                    break;
-                default:  // Sort By Name ASC
-                    items = items.OrderBy(s => s.ProductName);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(items.ToPagedList(pageNumber, pageSize));
-        }
-
-        // GET: Products 
-        public ActionResult Household(string sortOrder, string currentFilter, string searchString, int? page)
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var items = from i in db.Products
-                        select i;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                items = items.Where(s => s.ProductName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.ProductCategory.CategoryName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    items = items.OrderByDescending(s => s.ProductName);
-                    break;
-                case "Price":
-                    items = items.OrderBy(s => s.ProductPrice);
-                    break;
-                case "price_desc":
-                    items = items.OrderByDescending(s => s.ProductPrice);
-                    break;
-                default:  // Sort By Name ASC
-                    items = items.OrderBy(s => s.ProductName);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(items.ToPagedList(pageNumber, pageSize));
-        }
-
-        // GET: Products 
-        public ActionResult Electronics(string sortOrder, string currentFilter, string searchString, int? page)
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "price_desc" : "Price";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var items = from i in db.Products
-                        select i;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                items = items.Where(s => s.ProductName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.ProductCategory.CategoryName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    items = items.OrderByDescending(s => s.ProductName);
-                    break;
-                case "Price":
-                    items = items.OrderBy(s => s.ProductPrice);
-                    break;
-                case "price_desc":
-                    items = items.OrderByDescending(s => s.ProductPrice);
-                    break;
-                default:  // Sort By Name ASC
-                    items = items.OrderBy(s => s.ProductName);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(items.ToPagedList(pageNumber, pageSize));
-        }
-
         // GET: Products/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -288,7 +58,27 @@ namespace MusaTheWelder.Controllers
             if (product == null)
             {
                 return HttpNotFound();
+
             }
+            ViewBag.ProductId = id.Value;
+
+            var comments = db.ProductComments.Where(d => d.ProductId.Equals(id.Value)).ToList();
+            ViewBag.Comments = comments;            
+
+            var ratings = db.ProductComments.Where(d => d.ProductId.Equals(id.Value)).ToList();
+            if (ratings.Count() > 0)
+            {
+                var ratingSum = ratings.Sum(d => d.Rating.Value);                
+                ViewBag.RatingSum = ratingSum;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
+            
             return View(product);
         }
 

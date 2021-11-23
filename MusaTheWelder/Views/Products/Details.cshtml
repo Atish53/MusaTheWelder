@@ -1,7 +1,18 @@
 ﻿@model MusaTheWelder.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details"; 
+    var comments = (IEnumerable<MusaTheWelder.Models.ProductComments>)ViewBag.Comments;
+    var ratingSum = ViewBag.RatingSum;
+    var ratingCount = ViewBag.RatingCount;
+    var ProductIds = Model.ProductId;
+
+    decimal rating = 0;
+    if (ratingCount > 0)
+    {
+        rating = (ratingSum / ratingCount);
+    }
+    var totalRating = decimal.Parse(rating.ToString());
 }
 
 <style>
@@ -140,8 +151,8 @@
             <p><span style="font-size:36px">Stock Remaining: @Model.ProductStock.</span></p>
 
             <br />
-            <a href="#" class="AddLink" data-id="@Model.ProductId" data-toggle="modal" data-target="#myModal">Add to cart</a>
-            <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })--> |
+            <a href="#" class="AddLink btn btn-info" data-id="@Model.ProductId" data-toggle="modal" data-target="#myModal">Add to cart</a>
+            <!--@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.ProductId }, new { htmlAttributes = new { @data_toggle = "modal", @data_target = "#myModal" } })-->
 
         </div>
         <div class="column-33">
@@ -157,6 +168,46 @@
         @Html.ActionLink("Back to List", "Index")
     </p>
 }
+
+@foreach (var c in comments)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <i>@c.ThisDateTime</i>            
+            <br />
+            @for (var i = 1; i <= c.Rating; i++)
+            {
+                <span class="starGlowN"></span>
+            }
+            @for (var i = (c.Rating + 1); i <= 5; i++)
+            {
+                <span class="starFadeN"></span>
+            }
+        </div>
+        <div class="col-md-9">
+            @Html.Raw(c.Comments.Replace("\n", "<br />"))
+            <i> ~ @c.Name</i>
+        </div>
+    </div>
+}
+<hr />
+@Html.Partial("_CommentBox")
+
+@section Scripts{
+    <script>
+    function SCRate() {
+        for (var i = 1; i <= @totalRating; i++) {
+            $("#sRate" + i).attr('class', 'starGlowN');
+        }
+    }
+    $(function(){
+        SCRate();
+    });
+    </script>
+
+}
+
 
 
 

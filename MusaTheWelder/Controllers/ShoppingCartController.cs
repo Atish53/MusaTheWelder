@@ -172,7 +172,7 @@ namespace MusaTheWelder.Controllers
                 {
                     if (items.ProductId == c.ProductId)
                     {
-                        c.ProductStock += items.Count; //Temporary stock check pause... Make this -= to reduce stock
+                        c.ProductStock -= items.Count; //Temporary stock check pause... Make this -= to reduce stock
                         if (c.ProductStock == 0)
                         {
                             c.isActive = false; //Sets item to inactive due to stock being zero. 

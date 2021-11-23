@@ -186,6 +186,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
+    <Compile Include="Controllers\ProductCommentsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SaleQuotesController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
@@ -236,11 +237,14 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\EmailLogo.png" />
+    <Content Include="Images\StarFade.gif" />
+    <Content Include="Images\StarGlow.gif" />
     <Content Include="Images\W1.jpeg" />
     <Content Include="Images\W2.jpeg" />
     <Content Include="Images\W3.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\appdev2bmusa - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -313,6 +317,12 @@
     <Content Include="Views\Manage\YourPurchases.cshtml" />
     <Content Include="Views\Manage\YourQuotes.cshtml" />
     <Content Include="Views\Manage\InstallQuotes.cshtml" />
+    <Content Include="Views\ProductComments\Create.cshtml" />
+    <Content Include="Views\ProductComments\Delete.cshtml" />
+    <Content Include="Views\ProductComments\Details.cshtml" />
+    <Content Include="Views\ProductComments\Edit.cshtml" />
+    <Content Include="Views\ProductComments\Index.cshtml" />
+    <Content Include="Views\Shared\_CommentBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
